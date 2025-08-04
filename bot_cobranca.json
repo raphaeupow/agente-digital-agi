@@ -1,0 +1,401 @@
+[
+  {
+    "id": 1,
+    "component": "start",
+    "nextId": 2,
+    "statusId": 1
+  },
+  {
+    "id": 2,
+    "component": "integration",
+    "nextId": 3,
+    "faultNextId": 99,
+    "loadingNextId": 2,
+    "method": "getDadosCliente",
+    "timeout": 15,
+    "parameters": {
+      "telefone": "[telefone]"
+    },
+    "returns": {
+      "nome": "nome_cliente",
+      "valor": "valor_divida"
+    },
+    "isAsync": 0
+  },
+  {
+    "id": 3,
+    "component": "play",
+    "nextId": 4,
+    "text": "Bom dia! Estou falando com [nome_cliente]?",
+    "style": "natural"
+  },
+  {
+    "id": 4,
+    "component": "decision",
+    "muteNextId": 5,
+    "nextId": 99,
+    "timeout": 10,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 6,
+        "words": ["sim", "claro", "positivo", "estou", "sou eu", "estou falando"]
+      },
+      {
+        "nextId": 99,
+        "words": ["não", "negativo", "nunca", "não sou", "não estou"]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "component": "repeater",
+    "nextId": 51,
+    "totalRepeat": 1,
+    "faultNextId": 52
+  },
+  {
+    "id": 51,
+    "component": "play",
+    "nextId": 511,
+    "text": "Desculpe, não entendi sua resposta. Estou falando com [nome_cliente]?",
+    "style": "natural"
+  },
+  {
+    "id": 511,
+    "component": "decision",
+    "muteNextId": 512,
+    "nextId": 99,
+    "timeout": 10,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 6,
+        "words": ["sim", "claro", "positivo", "estou", "sou eu", "estou falando"]
+      },
+      {
+        "nextId": 99,
+        "words": ["não", "negativo", "nunca", "não sou", "não estou"]
+      }
+    ]
+  },
+  {
+    "id": 512,
+    "component": "play",
+    "nextId": 52,
+    "text": "Peço desculpas, mas preciso confirmar se estou falando com [nome_cliente]. Há alguém que possa continuar o atendimento?",
+    "style": "natural"
+  },
+  {
+    "id": 52,
+    "component": "decision",
+    "muteNextId": 99,
+    "nextId": 99,
+    "timeout": 10,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 2,
+        "words": ["sim", "claro", "positivo", "tem", "tem alguém"]
+      },
+      {
+        "nextId": 99,
+        "words": ["não", "negativo", "nunca", "não tem", "ninguém"]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "component": "play",
+    "nextId": 7,
+    "text": "Olá [nome_cliente], tudo bem? Gostaria de informar que você possui uma dívida pendente no valor de [valor_divida] reais. Você poderia realizar o pagamento hoje?",
+    "style": "natural"
+  },
+  {
+    "id": 7,
+    "component": "decision",
+    "muteNextId": 8,
+    "nextId": 9,
+    "timeout": 15,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 10,
+        "words": ["sim", "claro", "positivo", "pago", "posso pagar", "vou pagar", "pagar"]
+      },
+      {
+        "nextId": 11,
+        "words": ["não", "negativo", "nunca", "não posso", "não vou", "não pago"]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "component": "repeater",
+    "nextId": 81,
+    "totalRepeat": 1,
+    "faultNextId": 82
+  },
+  {
+    "id": 81,
+    "component": "play",
+    "nextId": 811,
+    "text": "Desculpe, não entendi sua resposta. Você poderia realizar o pagamento da dívida de [valor_divida] reais hoje?",
+    "style": "natural"
+  },
+  {
+    "id": 811,
+    "component": "decision",
+    "muteNextId": 812,
+    "nextId": 9,
+    "timeout": 15,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 10,
+        "words": ["sim", "claro", "positivo", "pago", "posso pagar", "vou pagar", "pagar"]
+      },
+      {
+        "nextId": 11,
+        "words": ["não", "negativo", "nunca", "não posso", "não vou", "não pago"]
+      }
+    ]
+  },
+  {
+    "id": 812,
+    "component": "play",
+    "nextId": 82,
+    "text": "Peço desculpas, mas preciso saber se você pode realizar o pagamento. Há alguém que possa continuar o atendimento?",
+    "style": "natural"
+  },
+  {
+    "id": 82,
+    "component": "decision",
+    "muteNextId": 99,
+    "nextId": 99,
+    "timeout": 10,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 7,
+        "words": ["sim", "claro", "positivo", "tem", "tem alguém"]
+      },
+      {
+        "nextId": 99,
+        "words": ["não", "negativo", "nunca", "não tem", "ninguém"]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "component": "repeater",
+    "nextId": 91,
+    "totalRepeat": 1,
+    "faultNextId": 11
+  },
+  {
+    "id": 91,
+    "component": "play",
+    "nextId": 911,
+    "text": "Desculpe, não entendi sua resposta. Você poderia realizar o pagamento da dívida de [valor_divida] reais hoje?",
+    "style": "natural"
+  },
+  {
+    "id": 911,
+    "component": "decision",
+    "muteNextId": 8,
+    "nextId": 11,
+    "timeout": 15,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 10,
+        "words": ["sim", "claro", "positivo", "pago", "posso pagar", "vou pagar", "pagar"]
+      },
+      {
+        "nextId": 11,
+        "words": ["não", "negativo", "nunca", "não posso", "não vou", "não pago"]
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "component": "play",
+    "nextId": 101,
+    "text": "Ótimo! Agradeço muito pela sua disposição em regularizar sua situação. Você pode realizar o pagamento através do nosso aplicativo, site ou em qualquer agência. Obrigado pela atenção e tenha um ótimo dia!",
+    "style": "natural"
+  },
+  {
+    "id": 101,
+    "component": "end"
+  },
+  {
+    "id": 11,
+    "component": "play",
+    "nextId": 111,
+    "text": "Entendo sua situação, mas preciso informar que, caso o pagamento não seja realizado, seu serviço será suspenso em 48 horas. Gostaria de discutir opções de parcelamento?",
+    "style": "natural"
+  },
+  {
+    "id": 111,
+    "component": "decision",
+    "muteNextId": 12,
+    "nextId": 13,
+    "timeout": 15,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 14,
+        "words": ["sim", "claro", "positivo", "quero", "pode", "parcelar"]
+      },
+      {
+        "nextId": 15,
+        "words": ["não", "negativo", "nunca", "não quero", "não posso", "não vou"]
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "component": "repeater",
+    "nextId": 121,
+    "totalRepeat": 1,
+    "faultNextId": 122
+  },
+  {
+    "id": 121,
+    "component": "play",
+    "nextId": 1211,
+    "text": "Desculpe, não entendi sua resposta. Gostaria de discutir opções de parcelamento para evitar a suspensão do serviço?",
+    "style": "natural"
+  },
+  {
+    "id": 1211,
+    "component": "decision",
+    "muteNextId": 1212,
+    "nextId": 13,
+    "timeout": 15,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 14,
+        "words": ["sim", "claro", "positivo", "quero", "pode", "parcelar"]
+      },
+      {
+        "nextId": 15,
+        "words": ["não", "negativo", "nunca", "não quero", "não posso", "não vou"]
+      }
+    ]
+  },
+  {
+    "id": 1212,
+    "component": "play",
+    "nextId": 122,
+    "text": "Peço desculpas, mas preciso saber se você gostaria de discutir opções de parcelamento. Há alguém que possa continuar o atendimento?",
+    "style": "natural"
+  },
+  {
+    "id": 122,
+    "component": "decision",
+    "muteNextId": 99,
+    "nextId": 99,
+    "timeout": 10,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 111,
+        "words": ["sim", "claro", "positivo", "tem", "tem alguém"]
+      },
+      {
+        "nextId": 99,
+        "words": ["não", "negativo", "nunca", "não tem", "ninguém"]
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "component": "repeater",
+    "nextId": 131,
+    "totalRepeat": 1,
+    "faultNextId": 15
+  },
+  {
+    "id": 131,
+    "component": "play",
+    "nextId": 1311,
+    "text": "Desculpe, não entendi sua resposta. Gostaria de discutir opções de parcelamento para evitar a suspensão do serviço?",
+    "style": "natural"
+  },
+  {
+    "id": 1311,
+    "component": "decision",
+    "muteNextId": 12,
+    "nextId": 15,
+    "timeout": 15,
+    "timeMute": 3,
+    "timeSilenceBetweenSpeech": 2,
+    "timeDTMF": 5,
+    "alternatives": [
+      {
+        "nextId": 14,
+        "words": ["sim", "claro", "positivo", "quero", "pode", "parcelar"]
+      },
+      {
+        "nextId": 15,
+        "words": ["não", "negativo", "nunca", "não quero", "não posso", "não vou"]
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "component": "play",
+    "nextId": 141,
+    "text": "Ótimo! Podemos parcelar sua dívida em até 6 vezes. Para mais informações, entre em contato com nosso atendimento através do número 0800-123-4567. Obrigado pela atenção e tenha um ótimo dia!",
+    "style": "natural"
+  },
+  {
+    "id": 141,
+    "component": "end"
+  },
+  {
+    "id": 15,
+    "component": "play",
+    "nextId": 151,
+    "text": "Entendo sua decisão. Infelizmente, seu serviço será suspenso em 48 horas devido ao não pagamento. Se mudar de ideia, entre em contato conosco através do número 0800-123-4567. Obrigado pela atenção e tenha um ótimo dia!",
+    "style": "natural"
+  },
+  {
+    "id": 151,
+    "component": "end"
+  },
+  {
+    "id": 99,
+    "component": "play",
+    "nextId": 991,
+    "text": "Peço desculpas pelo inconveniente. Não estou conseguindo atender suas necessidades no momento. Por favor, entre em contato conosco através do número 0800-123-4567. Obrigado pela atenção e tenha um ótimo dia!",
+    "style": "natural"
+  },
+  {
+    "id": 991,
+    "component": "end"
+  }
+] 

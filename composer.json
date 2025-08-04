@@ -1,0 +1,20 @@
+{
+    "name": "projeto/bot",
+    "description": "voicebot",
+    "minimum-stability": "dev",
+    "autoload": {
+      "psr-4": {"robot\\": "src/"}
+    },
+    "require": {
+        "raphaeu/colorize": "dev-master",
+        "predis/predis": "^2.0.x-dev",
+        "vlucas/phpdotenv": "5.4.x-dev",
+        "guzzlehttp/guzzle": "^7.0",
+        "ext-json": "*",
+        "kaiopiola/keygen": "dev-main",
+        "phpunit/php-timer": "*",
+        "google/cloud-logging": "dev-main",
+        "fieg/bayes": "dev-master",
+        "raphaeu/async": "dev-master"
+    }
+}
