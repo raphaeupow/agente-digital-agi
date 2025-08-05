@@ -1,8 +1,8 @@
 <?php
 namespace robot\tracer;
 
-use robot\Tools\Database;
-use robot\Tools\Debug;
+use robot\tools\Database;
+use robot\tools\Debug;
 
 
 class Attendance

@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php -q
 <?php
 
 require __DIR__.'/../vendor/autoload.php';
@@ -12,20 +12,19 @@ set_time_limit(-1);
 $dotenv = \Dotenv\Dotenv::createUnsafeImmutable(__DIR__.'/../');
 $dotenv->load();
 
-
 ini_set('log_errors', 1);
 ini_set('error_log', getenv('LOG_FILE'));
-
 
 if (!isset($argv[1])) {
     exit("Parâmetro da fila não informado.");
 }
 
-$queueId = $argv[1];
+$scriptId = $argv[1];
 
 try {
-    $bot = new Bot($queueId);
+    $bot = new Bot($scriptId);
     $bot->do();
 } catch(\Exception $e) {
     Debug::error("Falha ao executar o robo:" . $e->getMessage());
 }
+?>

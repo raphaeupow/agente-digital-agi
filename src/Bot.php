@@ -29,9 +29,6 @@ class Bot
             Variable::set("sys_key_id", AgiServices::getInstance()->getKeyId());
             Variable::set("sys_is_test", AgiServices::getInstance()->isTest());
 
-            //conectando ao banco de dados  
-            Database::init(getenv('DB_HOST'), getenv('DB_USER'), getenv('DB_PASS'),  getenv('DB_NAME'));
-
             //criando registro de atendimento
             $this->id = Attendance::create(
                 $scriptId,
@@ -69,7 +66,7 @@ class Bot
 
         $cont = 0;
         $nextId  = 1;
-        //Debug::debug($this->queue->getScript()->components);
+
         do {
             Step::create(
                 $this->id, 
