@@ -10,6 +10,8 @@ use robot\tools\AgiServices;
 use robot\Tools\Debug;
 use robot\tools\Provider;
 use robot\Variable;
+use robot\tools\Timer;
+
 
 class Decision extends ComponentAbstract
 {
@@ -72,7 +74,10 @@ class Decision extends ComponentAbstract
         } else {
             //transcrever audio para texto
             try{
+                Timer::start();
                 $text = Provider::get()->speechToText($fileName.'.wav',$bot->getScript()->getLanguage());
+                Timer::stop();
+                Debug::info("ASR timer: " . Timer::getElapsedTimeMs());
                 Debug::success("Value ASR: " . $text);
             }catch (\Exception $e){ 
                 Debug::error("Error ASR !".$e->getMessage());
