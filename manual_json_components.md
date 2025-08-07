@@ -2,6 +2,20 @@
 
 Este manual descreve a estrutura JSON para cada tipo de componente disponível no sistema Robot, incluindo exemplos práticos e boas práticas para implementação.
 
+## Conceitos Importantes
+
+### Entrada vs Saída
+
+- **Entrada**: Indica se o componente pode receber ligação de outros componentes
+  - `* entradas`: Pode receber ligação de qualquer número de componentes
+  - `não pode receber entrada`: Componente que inicia o fluxo (como Start)
+
+- **Saída**: Indica as ligações que o componente pode fazer com outros componentes
+  - `nextId`: Saída padrão para o próximo componente
+  - `faultNextId`: Saída em caso de falha
+  - `muteNextId`: Saída quando usuário não responde
+  - `alternatives`: Saídas específicas baseadas em condições
+
 ## Índice
 
 1. [Componentes Disponíveis](#componentes-disponíveis)
@@ -106,6 +120,12 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
 }
 ```
 
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: 
+  - `faultNextId`: Saída obrigatória quando nenhuma condição é atendida
+  - `options[].nextId`: Uma saída para cada opção/condição definida
+
 ### 2. Repeater (Repetidor)
 
 ```json
@@ -137,6 +157,12 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
   "faultNextId": 22
 }
 ```
+
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: 
+  - `nextId`: Saída obrigatória para o próximo componente após cada repetição
+  - `faultNextId`: Saída obrigatória quando atinge o limite de repetições
 
 ### 3. Play (Reprodução)
 
@@ -173,6 +199,11 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
 }
 ```
 
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: 
+  - `nextId`: Saída obrigatória para o próximo componente após a reprodução
+
 ### 4. Checkpoint (Ponto de Verificação)
 
 ```json
@@ -202,6 +233,11 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
 }
 ```
 
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: 
+  - `nextId`: Saída obrigatória para o próximo componente
+
 ### 5. Start (Início)
 
 ```json
@@ -230,6 +266,11 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
   "statusId": 1
 }
 ```
+
+**Regras de Conexão**:
+- **Entrada**: Não pode receber ligação de outros componentes (componente inicial)
+- **Saída**: 
+  - `nextId`: Saída obrigatória para o próximo componente
 
 ### 6. SetVar (Definir Variável)
 
@@ -263,6 +304,11 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
 }
 ```
 
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: 
+  - `nextId`: Saída obrigatória para o próximo componente
+
 ### 7. End (Fim)
 
 ```json
@@ -285,6 +331,10 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
   "component": "end"
 }
 ```
+
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: Não possui saída (componente final)
 
 ### 8. Decision (Decisão)
 
@@ -354,6 +404,13 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
 }
 ```
 
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: 
+  - `nextId`: Saída obrigatória quando nenhuma alternativa é reconhecida
+  - `muteNextId`: Saída obrigatória quando o usuário não responde
+  - `alternatives[].nextId`: Uma saída para cada alternativa definida
+
 ### 9. Integration (Integração)
 
 ```json
@@ -414,6 +471,13 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
 }
 ```
 
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: 
+  - `nextId`: Saída obrigatória quando a integração é bem-sucedida
+  - `faultNextId`: Saída obrigatória quando a integração falha
+  - `loadingNextId`: Saída obrigatória apenas quando `isAsync` é `true`
+
 ### 10. Transfer (Transferência)
 
 ```json
@@ -447,6 +511,11 @@ Este manual descreve a estrutura JSON para cada tipo de componente disponível n
   "type": "consultative"
 }
 ```
+
+**Regras de Conexão**:
+- **Entrada**: Pode receber ligação de qualquer número de componentes (`* entradas`)
+- **Saída**: 
+  - `nextId`: Saída obrigatória para o próximo componente após a transferência
 
 ## Exemplo de Fluxo Completo
 
